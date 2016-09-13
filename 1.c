@@ -7,25 +7,8 @@ Hint:  divide the integer by 2 and use stack or queue.*/
 int *stack;
 int SIZE = 0;
 
-void push(int value)
-{
-	stack = (int *)realloc(stack, sizeof(int)*(++SIZE));
-	stack[SIZE-1]= value;
-}
-int pop()
-{
-	if (SIZE)
-	{
-		int temp = stack[SIZE-1];
-		stack = (int *)realloc(stack, sizeof(int)*(--SIZE));		
-		return temp;
-	}
-	else
-	{
-		printf("Stack empty\n");
-		return -1;
-	}
-}
+void push(int value);
+int pop();
 
 int main()
 {
@@ -46,4 +29,25 @@ int main()
 		printf("%d", pop());
 	printf("\n");
 	return 0;	
+}
+
+void push(int value)
+{
+	stack = (int *)realloc(stack, sizeof(int)*(++SIZE));
+	stack[SIZE-1]= value;
+}
+
+int pop()
+{
+	if (SIZE)
+	{
+		int temp = stack[SIZE-1];
+		stack = (int *)realloc(stack, sizeof(int)*(--SIZE));		
+		return temp;
+	}
+	else
+	{
+		printf("Stack empty\n");
+		return -1;
+	}
 }
