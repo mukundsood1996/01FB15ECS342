@@ -7,58 +7,10 @@
 int twoStacks[UP];
 int size1 = 0, size2 = 0;
 
-void push1(int value)
-{
-	if ((size1 + size2) >= UP)
-	{
-		printf("overflow\n");
-		return;
-	}
-	int i;
-	for(i = size1; i; i--)
-		twoStacks[i] = twoStacks[i-1];
-	twoStacks[0] = value;
-	size1++;
-}
-void pop1()
-{
-	if (size1 <= 0)
-	{
-		printf("empty\n");
-		return;
-	}
-	printf("popped from 1: %d\n", twoStacks[0]);
-	int i;
-	for(i=0; i<size1; i++)
-		twoStacks[i] = twoStacks[i+1];
-	size1--;
-}
-void pop2()
-{
-	if (size2 <= 0)
-	{
-		printf("empty\n");
-		return;
-	}
-	printf("popped from 2: %d\n", twoStacks[UP]);
-	int i;
-	for(i=UP; i> UP-size2; i--)
-		twoStacks[i] = twoStacks[i-1];
-	size2--;
-}
-void push2(int value)
-{
-	if ((size1 + size2) >= UP)
-	{
-		printf("overflow\n");
-		return;
-	}
-	int i;
-	for(i = UP-size2; i<UP; i++)
-		twoStacks[i] = twoStacks[i+1];
-	twoStacks[UP] = value;
-	size2++;
-}
+void push1(int value);
+void pop1();
+void pop2();
+void push2(int value);
 
 int main()
 {
@@ -89,4 +41,60 @@ int main()
 		}
 	}
 	return 0;
+}
+
+void push1(int value)
+{
+	if ((size1 + size2) >= UP)
+	{
+		printf("overflow\n");
+		return;
+	}
+	int i;
+	for(i = size1; i; i--)
+		twoStacks[i] = twoStacks[i-1];
+	twoStacks[0] = value;
+	size1++;
+}
+
+void pop1()
+{
+	if (size1 <= 0)
+	{
+		printf("empty\n");
+		return;
+	}
+	printf("popped from 1: %d\n", twoStacks[0]);
+	int i;
+	for(i=0; i<size1; i++)
+		twoStacks[i] = twoStacks[i+1];
+	size1--;
+}
+
+void pop2()
+{
+	if (size2 <= 0)
+	{
+		printf("empty\n");
+		return;
+	}
+	printf("popped from 2: %d\n", twoStacks[UP]);
+	int i;
+	for(i=UP; i> UP-size2; i--)
+		twoStacks[i] = twoStacks[i-1];
+	size2--;
+}
+
+void push2(int value)
+{
+	if ((size1 + size2) >= UP)
+	{
+		printf("overflow\n");
+		return;
+	}
+	int i;
+	for(i = UP-size2; i<UP; i++)
+		twoStacks[i] = twoStacks[i+1];
+	twoStacks[UP] = value;
+	size2++;
 }
