@@ -1,6 +1,5 @@
 /*5. Write a program (or algorithm) to convert postfix expression to infix.*/
 
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -106,4 +105,3 @@ int isempty(node *top)
 		return 1;
 	return 0;	
 }
-
