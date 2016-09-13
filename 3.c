@@ -6,70 +6,12 @@
 int q1[20], q2[20], q3[40], q4[20], q5[20];
 int q1_size = 0, q2_size = 0, q3_size = 0, q4_size = 0, q5_size = 0;
 
-void enqueue(int *Q, int *size, int value)
-{
-	if (*size >= 20)
-	{
-		printf("Overflow\n");
-		return;
-	}
-	Q[(*size)++] = value;
-}
-/*
-void push(int *stack, int *size, int value)
-{
-	if (*size >= 20)
-	{
-		printf("Overflow\n");
-		return;
-	}
-	stack[(*size)++] = value;
-}
-int pop(int *stack, int *size)
-{
-	if (*size == 0)
-	{
-		printf("Empty queue\n");
-		return -1;
-	}
-	return stack[(*size)--];
-}
-*/
-int dequeue(int *Q, int *size)
-{
-	if (*size == 0)
-	{
-		printf("Empty queue\n");
-		return -1;
-	}
-	int i, temp = Q[0];
-	for(i=0; i < *size; i++)
-		Q[i] = Q[i+1];
-	(*size)--;
-	return temp;		
-}
-void display(int *Q, int size)
-{
-	if (size <= 0)
-	{
-		printf("Empty\n");
-		return;
-	}
-	int i = 0;
-	for(i=0; i < size; i++)
-		printf(" -> %d", Q[i]);
-	printf("\n");
-}
-int top(int *Q, int size)
-{
-	if (size <= 0)
-	{
-		printf("Empty\n");
-		return -1;
-	}
-	return Q[0]; 	
-}
-/*Elements are added to an extra queue and the third queue, then the elements are replaced in the queue from stack*/
+void enqueue(int *Q, int *size, int value);
+int dequeue(int *Q, int *size);
+int top(int *Q, int size);
+void AlternateMerge();
+void display(int *Q, int size); /*For verification*/
+
 int main()
 {
 	/*taking inputs*/
@@ -94,6 +36,44 @@ int main()
 		else
 			enqueue(q2, &q2_size, n);
 	}
+	AlternateMerge();
+	/*Queues are not meant to be traversed but this is to
+	show that the task is completed*/
+	printf("Merged queues: ");	
+	display(q3, q3_size);
+	printf("Elements of q1: ");
+	display(q4, q4_size);
+	printf("Elements of q2: ");
+	display(q5, q5_size);
+	return 0;
+}
+
+void enqueue(int *Q, int *size, int value)
+{
+	if (*size >= 20)
+	{
+		printf("Overflow\n");
+		return;
+	}
+	Q[(*size)++] = value;
+}
+
+int dequeue(int *Q, int *size)
+{
+	if (*size == 0)
+	{
+		printf("Empty queue\n");
+		return -1;
+	}
+	int i, temp = Q[0];
+	for(i=0; i < *size; i++)
+		Q[i] = Q[i+1];
+	(*size)--;
+	return temp;		
+}
+
+void AlternateMerge()
+{
 	while(q1_size || q2_size) /*loop to merge*/
 	{
 		if(q1_size)
@@ -107,12 +87,27 @@ int main()
 			enqueue(q3, &q3_size, dequeue(q2, &q2_size));
 		}
 	}
-	/*Queues are not meant to be traversed but this is to
-	show that the task is completed*/
-	printf("Merged queues: ");	
-	display(q3, q3_size);
-	printf("Elements of q1: ");
-	display(q4, q4_size);
-	printf("Elements of q2: ");
-	display(q5, q5_size);
+}
+
+void display(int *Q, int size)
+{
+	if (size <= 0)
+	{
+		printf("Empty\n");
+		return;
+	}
+	int i = 0;
+	for(i=0; i < size; i++)
+		printf(" -> %d", Q[i]);
+	printf("\n");
+}
+
+int top(int *Q, int size)
+{
+	if (size <= 0)
+	{
+		printf("Empty\n");
+		return -1;
+	}
+	return Q[0]; 	
 }
